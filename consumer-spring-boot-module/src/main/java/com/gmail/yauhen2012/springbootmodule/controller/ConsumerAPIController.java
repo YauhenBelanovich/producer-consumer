@@ -17,10 +17,12 @@ import com.gmail.yauhen2012.service.CallStatisticService;
 import com.gmail.yauhen2012.service.StatisticMBean;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,15 +35,18 @@ public class ConsumerAPIController {
     public ConsumerAPIController(CallStatisticService callStatisticService) {this.callStatisticService = callStatisticService;}
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public String addToStatistic(@RequestBody String ip) throws IOException {
         logger.debug("POST API call consumer method");
         logger.info(ip);
-        callStatisticService.setStatistic(ip);
-        return "Call successfully";
+        if (callStatisticService.setStatistic(ip)) {
+            return "Call successfully";
+        }
+        return "Call failed";
     }
 
     @GetMapping
-    public Map<String, Integer> getStatistic() throws IOException, MalformedObjectNameException { ;
+    public Map<String, Integer> getStatistic() throws IOException, MalformedObjectNameException {
 
         logger.debug("GET API statistic method");
 

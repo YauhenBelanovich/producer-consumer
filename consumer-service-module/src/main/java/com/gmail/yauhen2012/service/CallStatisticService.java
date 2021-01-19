@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface CallStatisticService {
 
-    void setStatistic(String ip);
+    Boolean setStatistic(String ip);
 
     Map<String, Integer> getStatisticMap();
 }

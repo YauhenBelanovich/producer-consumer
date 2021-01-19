@@ -11,13 +11,14 @@ public class CallStatisticServiceImpl implements com.gmail.yauhen2012.service.Ca
     private Map<String, Integer> statisticMap = new HashMap<>();
 
     @Override
-    public void setStatistic(String ip) {
+    public Boolean setStatistic(String ip) {
         if (statisticMap.containsKey(ip)) {
             Integer value = statisticMap.get(ip);
             statisticMap.put(ip, value + 1);
         } else {
             statisticMap.put(ip, 1);
         }
+        return statisticMap.containsKey(ip);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.gmail.yauhen2012.service.jmx;
 import java.util.Map;
 
 import com.gmail.yauhen2012.service.CallStatisticService;
-import com.gmail.yauhen2012.service.impl.CallStatisticServiceImpl;
 import com.gmail.yauhen2012.service.StatisticMBean;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
