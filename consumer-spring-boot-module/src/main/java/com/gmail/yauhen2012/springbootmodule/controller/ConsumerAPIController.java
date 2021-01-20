@@ -15,6 +15,7 @@ import javax.management.remote.JMXServiceURL;
 
 import com.gmail.yauhen2012.service.CallStatisticService;
 import com.gmail.yauhen2012.service.StatisticMBean;
+import com.gmail.yauhen2012.springbootmodule.util.ReadPropertyFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,11 @@ public class ConsumerAPIController {
 
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
     private final CallStatisticService callStatisticService;
+    private final ReadPropertyFile readPropertyFile;
 
-    public ConsumerAPIController(CallStatisticService callStatisticService) {this.callStatisticService = callStatisticService;}
+    public ConsumerAPIController(CallStatisticService callStatisticService, ReadPropertyFile readPropertyFile) {this.callStatisticService = callStatisticService;
+        this.readPropertyFile = readPropertyFile;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,7 +55,8 @@ public class ConsumerAPIController {
         logger.debug("GET API statistic method");
 
         MBeanServer server = ManagementFactory.getPlatformMBeanServer();
-        JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://127.0.0.1:9000/jmxrmi");
+        String jmxHostPort = readPropertyFile.getHostProperty();
+        JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + jmxHostPort + "/jmxrmi");
         JMXConnector connector = JMXConnectorFactory.connect(url, null);
         MBeanServerConnection connection = connector.getMBeanServerConnection();
 
