@@ -16,7 +16,7 @@ public class ReadPropertyFile {
 
     private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
-    public String getUrlProperty() {
+    public String getConsumerUrlFromPropertyFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/application.properties")) {
             Properties prop = new Properties();
             if (inputStream == null) {
@@ -31,7 +31,7 @@ public class ReadPropertyFile {
         return null;
     }
 
-    public User getUser(String userName) {
+    public User getUserFromPropertyFile(String userName) {
         User user = new User();
         try (InputStream inputStream = getClass().getResourceAsStream("/application.properties")) {
             Properties prop = new Properties();

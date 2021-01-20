@@ -25,7 +25,7 @@ public class ReadPropertyFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.error("Cannot find bot property - " + "consumer.url");
+        logger.error("Cannot find bot property - " + "jmx.url");
         return null;
     }
 

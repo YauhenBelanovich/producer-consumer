@@ -22,7 +22,7 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public List<String> getResponseFromConsumer(String callTimes, String ip) {
-        String url = readPropertyFile.getUrlProperty();
+        String url = readPropertyFile.getConsumerUrlFromPropertyFile();
         if (url != null) {
             RestTemplate restTemplate = new RestTemplate();
             List<String> resultList = new ArrayList<>();

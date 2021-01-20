@@ -41,11 +41,12 @@ public class ConsumerAPIController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String addToStatistic(@RequestBody String ip) throws IOException {
-        logger.debug("POST API call consumer method");
         logger.info(ip);
         if (callStatisticService.setStatistic(ip)) {
+            logger.debug("POST API call consumer method");
             return "Call successfully";
         }
+        logger.error("POST API call consumer method FAILED");
         return "Call failed";
     }
 

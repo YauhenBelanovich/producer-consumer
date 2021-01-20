@@ -23,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        User user = readPropertyFile.getUser(userName);
+        User user = readPropertyFile.getUserFromPropertyFile(userName);
         if (user == null) {
             throw new UsernameNotFoundException("User - '" + userName + "' is not found");
         }
